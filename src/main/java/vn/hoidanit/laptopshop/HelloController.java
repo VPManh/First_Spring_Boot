@@ -8,7 +8,7 @@ public class HelloController {
 
     @GetMapping("/")
     public String index() {
-        return "Hello Mạnh Văn 2003!";
+        return "đã tự update được rồi";
     }
     @GetMapping("/user")
     public String userPage() {
