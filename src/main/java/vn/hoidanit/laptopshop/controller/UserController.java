@@ -2,6 +2,7 @@ package vn.hoidanit.laptopshop.controller;
 
 
 import vn.hoidanit.laptopshop.domain.User;
+import vn.hoidanit.laptopshop.repository.UserRepository;
 import vn.hoidanit.laptopshop.service.UserService;
 
 import org.springframework.stereotype.Controller;
@@ -14,16 +15,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class UserController {
 
     // Dependency Injection
-    private UserService userService;
-
+    private final UserService userService;
+  
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @RequestMapping("/")
     public String getHomePage(Model model) {
-        String test = this.userService.handHello();
-        model.addAttribute("test", test);
+        // String test = this.userService.handHello();
+        // model.addAttribute("test", test);
         return "hello";
     }
     @RequestMapping("/admin/user") // nếu chỉ truyền String vào thì mặc định là doGet
@@ -36,7 +37,8 @@ public class UserController {
     public String CreateUser(Model model, @ModelAttribute("newUser") User hoidanit)  {//thêm ModelAttribue ở bên form và controller
         // String test = this.userService.handHello();
         // model.addAttribute("test", test);
-        System.out.println("be run" +hoidanit);
+        System.out.println("be run " +hoidanit);
+        userService.handleSaveUser(hoidanit);
         return "hello";
     }
 }
