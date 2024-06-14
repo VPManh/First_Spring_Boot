@@ -17,7 +17,7 @@
 
         <body>
             <h1>
-                ${test}
+                <!-- ${test} -->
             </h1>
             hello jsp
             <button class="btn btn-success">Submit</button>
