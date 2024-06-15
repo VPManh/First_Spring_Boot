@@ -26,7 +26,7 @@
                             <h3>Create a user</h3>
                             <hr />
                             <!-- sử dụng form: để sử dụng được form và thuộc tính modelAttribute để tạo đối tượng để truy xuất -->
-                            <form:form action="/admin/user/create1" method="post" modelAttribute="newUser">
+                            <form:form action="/admin/user/create" method="post" modelAttribute="newUser">
                                 <div class="mb-3">
                                     <label class="form-label">Email:</label>
                                     <form:input type="email" class="form-control" path="email"/>

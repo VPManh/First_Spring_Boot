@@ -25,24 +25,31 @@ public class UserController {
 
     @RequestMapping("/")
     public String getHomePage(Model model) {
-        List<User> listUser = this.userService.getFindAllUser();
-        System.out.println(listUser);
-        List<User> listByUser = this.userService.getFindByEmailUser("huy@gmail.com");
-        System.out.println(listByUser);
+        // List<User> listUser = this.userService.getFindAllUser();
+        // System.out.println(listUser);
+        // List<User> listByUser = this.userService.getFindByEmailUser("huy@gmail.com");
+        // System.out.println(listByUser);
         // String test = this.userService.handHello();
         // model.addAttribute("test", test);
         return "hello";
     }
     @RequestMapping("/admin/user") // nếu chỉ truyền String vào thì mặc định là doGet
-    public String getCreate(Model model) {
+    public String getViewTableUser(Model model) {
+        List<User> users = this.userService.getFindAllUser();
+        // System.out.println(">>> check user: "+users);
+        model.addAttribute("users", users);
+        return "/admin/user/table-user";
+    }
+    @RequestMapping("/admin/user/create") 
+    public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User());
         return "/admin/user/create";
     }
 
-    @RequestMapping(value = "/admin/user/create1", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
     public String CreateUser(Model model, @ModelAttribute("newUser") User hoidanit)  {//thêm ModelAttribue ở bên form và controller
-        System.out.println("be run " +hoidanit);
+        // System.out.println("be run " +hoidanit);
         userService.handleSaveUser(hoidanit);
-        return "hello";
+        return "redirect:/admin/user";
     }
 }
