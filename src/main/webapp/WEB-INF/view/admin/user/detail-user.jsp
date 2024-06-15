@@ -41,6 +41,7 @@
 
                                 </ul>
                                </div>
+                               <a href="/admin/user" class="btn btn-success" style="margin-top: 20px;">Back</a>
 
                     </div>
 
