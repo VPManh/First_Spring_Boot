@@ -1,6 +1,5 @@
 package vn.hoidanit.laptopshop.controller;
 
-
 import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.service.UserService;
 
@@ -15,14 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
 
     // Dependency Injection
     private final UserService userService;
-  
+
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -37,6 +37,7 @@ public class UserController {
         // model.addAttribute("test", test);
         return "hello";
     }
+
     @RequestMapping("/admin/user") // nếu chỉ truyền String vào thì mặc định là doGet
     public String getViewTableUser(Model model) {
         List<User> users = this.userService.getFindAllUser();
@@ -46,23 +47,24 @@ public class UserController {
     }
 
     // Start View Detail
-    @RequestMapping("/admin/user/{id}") 
-    public String getDetailUserPage(Model model,@PathVariable Long id) {
-        System.out.println("Check path id: "+id);
+    @RequestMapping("/admin/user/{id}")
+    public String getDetailUserPage(Model model, @PathVariable Long id) {
+        System.out.println("Check path id: " + id);
         model.addAttribute("id", id);
         User users = this.userService.getUserById(id);
         model.addAttribute("userId", users);
         return "/admin/user/detail-user";
     }
 
-    @RequestMapping("/admin/user/create") 
+    @RequestMapping("/admin/user/create")
     public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User());
         return "/admin/user/create";
     }
 
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
-    public String CreateUser(Model model, @ModelAttribute("newUser") User hoidanit)  {//thêm ModelAttribue ở bên form và controller
+    public String CreateUser(Model model, @ModelAttribute("newUser") User hoidanit) {// thêm ModelAttribue ở bên form và
+                                                                                     // controller
         // System.out.println("be run " +hoidanit);
         userService.handleSaveUser(hoidanit);
         return "redirect:/admin/user";
@@ -72,28 +74,42 @@ public class UserController {
 
     // Start View Update
 
-    @RequestMapping("/admin/user/update/{id}") 
-    public String getUpdateUserPage(Model model,@PathVariable Long id) {
+    @RequestMapping("/admin/user/update/{id}")
+    public String getUpdateUserPage(Model model, @PathVariable Long id) {
         User currentUser = this.userService.getUserById(id);
         model.addAttribute("newUser", currentUser);
         return "/admin/user/update-user";
     }
 
     @PostMapping("/admin/user/update")
-    public String postUpdateUser(Model model,@ModelAttribute("newUser") User user) {
+    public String postUpdateUser(Model model, @ModelAttribute("newUser") User user) {
         User currentUser = this.userService.getUserById(user.getId());
         if (currentUser != null) {
             currentUser.setAddress(user.getAddress());
             currentUser.setFullName(user.getFullName());
             currentUser.setPhone(user.getPhone());
 
-            this.userService.handleSaveUser(user);
+            this.userService.handleSaveUser(currentUser);
         }
         return "redirect:/admin/user";
     }
-    
+    // End View Update
 
+    // Start View Delete
+    @GetMapping("/admin/user/delete/{id}")
+    public String getDeleteUserPage(Model model, @PathVariable long id) {
+        // User user = new User();
+        // user.setId(id);
+        model.addAttribute("id", id);
+        model.addAttribute("newUser", new User());
+        return "admin/user/delete-user";
+    }
 
-    
+    @PostMapping("/admin/user/delete")
+    public String postDeletePage(Model model, @ModelAttribute("newUser") User user) {
+        User users = this.userService.handleDeleteUser(user.getId());
+        System.out.println("check delete id =" + users);
+        return "redirect:/admin/user";
+    }
 
 }
