@@ -1,9 +1,8 @@
-package vn.hoidanit.laptopshop.controller;
+package vn.hoidanit.laptopshop.controller.admin;
 
 import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.service.UserService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -13,9 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -43,7 +40,7 @@ public class UserController {
         List<User> users = this.userService.getFindAllUser();
         // System.out.println(">>> check user: "+users);
         model.addAttribute("users", users);
-        return "/admin/user/table-user";
+        return "/admin/user/show";
     }
 
     // Start View Detail
@@ -53,7 +50,7 @@ public class UserController {
         model.addAttribute("id", id);
         User users = this.userService.getUserById(id);
         model.addAttribute("userId", users);
-        return "/admin/user/detail-user";
+        return "/admin/user/detail";
     }
 
     @RequestMapping("/admin/user/create")
@@ -78,7 +75,7 @@ public class UserController {
     public String getUpdateUserPage(Model model, @PathVariable Long id) {
         User currentUser = this.userService.getUserById(id);
         model.addAttribute("newUser", currentUser);
-        return "/admin/user/update-user";
+        return "/admin/user/update";
     }
 
     @PostMapping("/admin/user/update")
@@ -102,7 +99,7 @@ public class UserController {
         // user.setId(id);
         model.addAttribute("id", id);
         model.addAttribute("newUser", new User());
-        return "admin/user/delete-user";
+        return "admin/user/delete";
     }
 
     @PostMapping("/admin/user/delete")
