@@ -1,5 +1,7 @@
 package vn.hoidanit.laptopshop.domain;
 
+import java.util.List;
+
 import org.hibernate.annotations.ManyToAny;
 
 import jakarta.persistence.Entity;
@@ -8,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,6 +26,10 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+
+    @OneToMany( mappedBy = "order")
+    List<OrderDetail> orderDetails;
 
     public long getId() {
         return id;
