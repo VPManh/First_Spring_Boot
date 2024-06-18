@@ -1,6 +1,7 @@
 package vn.hoidanit.laptopshop.controller.admin;
 
 import vn.hoidanit.laptopshop.domain.User;
+import vn.hoidanit.laptopshop.service.UploadService;
 import vn.hoidanit.laptopshop.service.UserService;
 
 import java.util.List;
@@ -10,18 +11,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
 
 @Controller
 public class UserController {
 
     // Dependency Injection
     private final UserService userService;
+    private final UploadService uploadService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UploadService uploadService) {
         this.userService = userService;
+        this.uploadService = uploadService;
     }
 
     @RequestMapping("/")
@@ -53,17 +58,20 @@ public class UserController {
         return "/admin/user/detail";
     }
 
-    @RequestMapping("/admin/user/create")
+    @GetMapping("/admin/user/create")
     public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User());
         return "/admin/user/create";
     }
 
-    @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
-    public String CreateUser(Model model, @ModelAttribute("newUser") User hoidanit) {// thêm ModelAttribue ở bên form và
-                                                                                     // controller
+    @PostMapping(value = "/admin/user/create")
+    public String CreateUserPage(Model model
+            , @ModelAttribute("newUser") User hoidanit,
+            @RequestParam("hoidanitFile") MultipartFile file) {// thêm ModelAttribue ở bên form và controller
         // System.out.println("be run " +hoidanit);
-        userService.handleSaveUser(hoidanit);
+        // userService.handleSaveUser(hoidanit);
+       String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
+        
         return "redirect:/admin/user";
     }
 
