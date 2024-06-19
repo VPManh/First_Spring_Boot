@@ -6,6 +6,7 @@ import vn.hoidanit.laptopshop.service.UserService;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,17 +17,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-
 @Controller
 public class UserController {
 
     // Dependency Injection
     private final UserService userService;
     private final UploadService uploadService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService, UploadService uploadService) {
+    public UserController(UserService userService, UploadService uploadService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.uploadService = uploadService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @RequestMapping("/")
@@ -65,13 +67,18 @@ public class UserController {
     }
 
     @PostMapping(value = "/admin/user/create")
-    public String CreateUserPage(Model model
-            , @ModelAttribute("newUser") User hoidanit,
+    public String CreateUserPage(Model model, @ModelAttribute("newUser") User user,
             @RequestParam("hoidanitFile") MultipartFile file) {// thêm ModelAttribue ở bên form và controller
-        // System.out.println("be run " +hoidanit);
-        // userService.handleSaveUser(hoidanit);
-       String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
-        
+
+        String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
+        String hashPassword = this.passwordEncoder.encode(user.getPassword());
+
+        user.setAvatar(avatar);
+        user.setPassword(hashPassword);
+
+        user.setRole(this.userService.getHashPassWord(user.getRole().getName()));
+
+        this.userService.handleSaveUser(user);
         return "redirect:/admin/user";
     }
 
@@ -88,6 +95,7 @@ public class UserController {
 
     @PostMapping("/admin/user/update")
     public String postUpdateUser(Model model, @ModelAttribute("newUser") User user) {
+
         User currentUser = this.userService.getUserById(user.getId());
         if (currentUser != null) {
             currentUser.setAddress(user.getAddress());

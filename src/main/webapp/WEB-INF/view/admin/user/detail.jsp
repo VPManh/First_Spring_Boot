@@ -45,7 +45,8 @@
                                                 <li class="list-group-item">FullName:${userId.fullName} </li>
                                                 <li class="list-group-item">Address:${userId.address} </li>
                                                 <li class="list-group-item">Phone Number: ${userId.phone}</li>
-                
+                                                <li class="list-group-item">Role: ${userId.role.name}</li>
+                                                <li class="list-group-item">Avatar: ${userId.avatar}</li>
                                                 </ul>
                                                </div>
                                                <a href="/admin/user" class="btn btn-success" style="margin-top: 20px;">Back</a>
