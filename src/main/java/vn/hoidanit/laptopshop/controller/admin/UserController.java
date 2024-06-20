@@ -53,7 +53,7 @@ public class UserController {
     // Start View Detail
     @RequestMapping("/admin/user/{id}")
     public String getDetailUserPage(Model model, @PathVariable Long id) {
-        System.out.println("Check path id: " + id);
+        // System.out.println("Check path id: " + id);
         model.addAttribute("id", id);
         User users = this.userService.getUserById(id);
         model.addAttribute("userId", users);
@@ -75,7 +75,6 @@ public class UserController {
 
         user.setAvatar(avatar);
         user.setPassword(hashPassword);
-
         user.setRole(this.userService.getHashPassWord(user.getRole().getName()));
 
         this.userService.handleSaveUser(user);
@@ -101,6 +100,7 @@ public class UserController {
             currentUser.setAddress(user.getAddress());
             currentUser.setFullName(user.getFullName());
             currentUser.setPhone(user.getPhone());
+            // currentUser.setRole();
 
             this.userService.handleSaveUser(currentUser);
         }
@@ -114,7 +114,7 @@ public class UserController {
         // User user = new User();
         // user.setId(id);
         model.addAttribute("id", id);
-        model.addAttribute("newUser", new User());
+        model.addAttribute("newUser", this.userService.getUserById(id)); // lấy dữ liệu từ service thay vì tạo mới User (new User())
         return "admin/user/delete";
     }
 
