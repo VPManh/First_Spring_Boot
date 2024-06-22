@@ -22,39 +22,30 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Manage Detail</h1>
+                                <h1 class="mt-4">Manage Delete</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item active"><a href="/admin/user">Users</a></li>
-
-                                    <li class="breadcrumb-item active">Detail</li>
+                                    <li class="breadcrumb-item active"><a href="/admin/product">Product</a></li>
+                                    <li class="breadcrumb-item active">Delete</li>
                                 </ol>
                                 <div class="container mt-5">
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
-                                            <div class="d-flex justify-content-between">
-                                                <h3>Details user ${id}</h3>
-                
+                                            <h3>Delete a product id= ${id}</h3>
+                                            <hr />
+                                            <!-- sử dụng form: để sử dụng được form và thuộc tính modelAttribute để tạo đối tượng để truy xuất -->
+                                            <div class="alert alert-danger" role="alert">
+                                                Bạn có chắc chắn muốn xoá không!
                                             </div>
-                                        <hr>
-                                            <div class="card" >
-                                                <div class="card-header">
-                                                User Information
+                
+                                            <form:form action="/admin/product/delete" method="post" modelAttribute="newProduct">
+                                                <div class="mb-3" style="display: none;">
+                                                    <label class="form-label">Id:</label>
+                                                    <form:input value="${id}"  type="text" class="form-control" path="id" />
                                                 </div>
-                                                <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">ID:${userId.id}  </li>
-                                                <li class="list-group-item">Email:${userId.email} </li>
-                                                <li class="list-group-item">FullName:${userId.fullName} </li>
-                                                <li class="list-group-item">Address:${userId.address} </li>
-                                                <li class="list-group-item">Phone Number: ${userId.phone}</li>
-                                                <li class="list-group-item">Role: ${userId.role.name}</li>
-                                                <li class="list-group-item">Avatar:  
-                                                    <img src="/images/avatar/${userId.avatar}" alt="User Avatar"
-                                                        style="max-width: 200px; max-height: 200px; margin-left: 50px;">
-                                                </li>
-                                                </ul>
-                                               </div>
-                                               <a href="/admin/user" class="btn btn-success" style="margin-top: 20px;">Back</a>
+                                                <button class="btn btn-danger">Delete</button>
+                                            </form:form>
+                                        </div>
                 
                                     </div>
                 

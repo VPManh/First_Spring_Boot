@@ -16,53 +16,56 @@
             </head>
 
             <body class="sb-nav-fixed">
-                <jsp:include page="../layout/header.jsp"/>
+                <jsp:include page="../layout/header.jsp" />
                 <div id="layoutSidenav">
-                    <jsp:include page="../layout/sidebar.jsp"/>
+                    <jsp:include page="../layout/sidebar.jsp" />
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
                                 <h1 class="mt-4">Manage Detail</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item active"><a href="/admin/user">Users</a></li>
-
+                                    <li class="breadcrumb-item active"><a href="/admin/product">Product</a></li>
                                     <li class="breadcrumb-item active">Detail</li>
                                 </ol>
                                 <div class="container mt-5">
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
                                             <div class="d-flex justify-content-between">
-                                                <h3>Details user ${id}</h3>
-                
+                                                <h3>Details Product ${id}</h3>
+
                                             </div>
-                                        <hr>
-                                            <div class="card" >
+                                            <hr>
+                                            <div class="card">
                                                 <div class="card-header">
-                                                User Information
+                                                    Products Information
                                                 </div>
                                                 <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">ID:${userId.id}  </li>
-                                                <li class="list-group-item">Email:${userId.email} </li>
-                                                <li class="list-group-item">FullName:${userId.fullName} </li>
-                                                <li class="list-group-item">Address:${userId.address} </li>
-                                                <li class="list-group-item">Phone Number: ${userId.phone}</li>
-                                                <li class="list-group-item">Role: ${userId.role.name}</li>
-                                                <li class="list-group-item">Avatar:  
-                                                    <img src="/images/avatar/${userId.avatar}" alt="User Avatar"
-                                                        style="max-width: 200px; max-height: 200px; margin-left: 50px;">
-                                                </li>
+                                                    <li class="list-group-item">ID: ${product.id} </li>
+                                                    <li class="list-group-item">name: ${product.name} </li>
+                                                    <li class="list-group-item">detailDesc: ${product.detailDesc} </li>
+                                                    <li class="list-group-item">shortDesc: ${product.shortDesc}</li>
+                                                    <li class="list-group-item">quantity: ${product.quantity}</li>
+                                                    <li class="list-group-item">price: ${product.price}</li>
+                                                    <li class="list-group-item">factory: ${product.factory}</li>
+                                                    <li class="list-group-item">target: ${product.target}</li>
+                                                    <!-- <li class="list-group-item">image:${product.image} </li> -->
+                                                    <li class="list-group-item">Image:
+                                                        <img src="/images/product/${product.image}" alt="Product Image"
+                                                            style="max-width: 200px; max-height: 200px; margin-left: 50px;">
+                                                    </li>
                                                 </ul>
-                                               </div>
-                                               <a href="/admin/user" class="btn btn-success" style="margin-top: 20px;">Back</a>
-                
+                                            </div>
+                                            <a href="/admin/product" class="btn btn-success"
+                                                style="margin-top: 20px;">Back</a>
+
+                                        </div>
+
                                     </div>
-                
+
                                 </div>
-                
-                            </div>
                         </main>
-                        <jsp:include page="../layout/footer.jsp"/>
+                        <jsp:include page="../layout/footer.jsp" />
                     </div>
                 </div>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

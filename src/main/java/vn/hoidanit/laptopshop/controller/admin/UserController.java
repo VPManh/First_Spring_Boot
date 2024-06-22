@@ -1,5 +1,6 @@
 package vn.hoidanit.laptopshop.controller.admin;
 
+import vn.hoidanit.laptopshop.domain.Product;
 import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.service.UploadService;
 import vn.hoidanit.laptopshop.service.UserService;
@@ -70,21 +71,21 @@ public class UserController {
         return "/admin/user/create";
     }
 
-    @PostMapping(value = "/admin/user/create")
+    @PostMapping("/admin/user/create")
     public String CreateUserPage(Model model, @ModelAttribute("newUser") @Valid User user,
-    BindingResult newUserbindingResult,@RequestParam("hoidanitFile") MultipartFile file) {// thêm ModelAttribue ở bên// form và controller
+    BindingResult newUserBindingResult,
+    @RequestParam("hoidanitFile") MultipartFile file) {// thêm ModelAttribue ở bên// form và controller
 
         // Validate
-        List<FieldError> errors = newUserbindingResult.getFieldErrors();
-        for (FieldError error : errors) {
-            System.out.println(error.getField() + " - " + error.getDefaultMessage());
-        }
+        // List<FieldError> errors = newUserBindingResult.getFieldErrors();
+        // for (FieldError error : errors) {
+        //     System.out.println(error.getField() + " - " + error.getDefaultMessage());
+        // }
 
-        if (newUserbindingResult.hasErrors()) {
+        if (newUserBindingResult.hasErrors()) {
             return "/admin/user/create";
-            
         }
-        //
+        
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
         String hashPassword = this.passwordEncoder.encode(user.getPassword());
 
@@ -108,14 +109,24 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/update")
-    public String postUpdateUser(Model model, @ModelAttribute("newUser") User user) {
+    public String postUpdateUser(Model model, @ModelAttribute("newUser") @Valid User user
+    ,BindingResult newUserBindingResult, @RequestParam("hoidanitFile") MultipartFile file) {
 
         User currentUser = this.userService.getUserById(user.getId());
+        model.addAttribute("newUser", currentUser);
         if (currentUser != null) {
+
+            if (!file.isEmpty()) {
+                String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
+                currentUser.setAvatar(avatar);
+            }
             currentUser.setAddress(user.getAddress());
             currentUser.setFullName(user.getFullName());
             currentUser.setPhone(user.getPhone());
-            // currentUser.setRole();
+            // currentUser.setEmail(user.getEmail());
+
+            // vì sử dụng đối tượng Role trong User nên phải gọi như vây
+            currentUser.getRole().setName(user.getRole().getName());
 
             this.userService.handleSaveUser(currentUser);
         }
@@ -129,8 +140,8 @@ public class UserController {
         // User user = new User();
         // user.setId(id);
         model.addAttribute("id", id);
-        model.addAttribute("newUser", this.userService.getUserById(id)); // lấy dữ liệu từ service thay vì tạo mới User
-                                                                         // (new User())
+        model.addAttribute("newUser", this.userService.getUserById(id)); // lấy dữ liệu từ service thay vì tạo mới User (new User())
+                                                                         
         return "admin/user/delete";
     }
 

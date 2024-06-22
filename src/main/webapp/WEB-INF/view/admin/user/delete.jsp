@@ -25,6 +25,8 @@
                                 <h1 class="mt-4">Manage Delete</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
+                                    <li class="breadcrumb-item active"><a href="/admin/user">Users</a></li>
+
                                     <li class="breadcrumb-item active">Delete</li>
                                 </ol>
                                 <div class="container mt-5">
