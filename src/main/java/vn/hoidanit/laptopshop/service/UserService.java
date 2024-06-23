@@ -2,11 +2,11 @@ package vn.hoidanit.laptopshop.service;
 
 import java.util.List;
 
-import org.eclipse.tags.shaded.org.apache.regexp.recompile;
 import org.springframework.stereotype.Service;
 
 import vn.hoidanit.laptopshop.domain.Role;
 import vn.hoidanit.laptopshop.domain.User;
+import vn.hoidanit.laptopshop.domain.dto.RegisterDTO;
 import vn.hoidanit.laptopshop.repository.RoleRepository;
 import vn.hoidanit.laptopshop.repository.UserRepository;
 
@@ -43,4 +43,21 @@ public class UserService {
     public Role getHashPassWord(String name){
         return this.roleRepository.findByName(name);
     }
+
+    public Role getRoleByName(String name) {
+        return this.roleRepository.findByName(name);
+    }
+
+    // sử dụng dto (data transfer object) để lấy dữ liệu từ dto sang cho user
+    public User registerDTOtoUser(RegisterDTO registerDTO){
+         
+        User user = new User();
+
+        user.setFullName(registerDTO.getFirstName()+ " " +registerDTO.getLastName());
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(registerDTO.getPassword());
+
+        return user;
+    }
+    
 }
