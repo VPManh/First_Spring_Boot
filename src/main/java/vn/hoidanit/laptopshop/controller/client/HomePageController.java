@@ -55,10 +55,15 @@ public class HomePageController {
     public String handleRegister(Model model, @ModelAttribute("registerUser") @Valid RegisterDTO registerDTO
     ,BindingResult registerUserBindingResult) {
 
-        // Validate
-        List<FieldError> errors = registerUserBindingResult.getFieldErrors();
-        for (FieldError error : errors) {
-            System.out.println(error.getField() + " - " + error.getDefaultMessage());
+        // // Validate
+        // List<FieldError> errors = registerUserBindingResult.getFieldErrors();
+        // for (FieldError error : errors) {
+        //     System.out.println(error.getField() + " - " + error.getDefaultMessage());
+        // }
+
+        if (registerUserBindingResult.hasErrors()) {
+            return "/client/auth/register";
+            
         }
 
         User user = this.userService.registerDTOtoUser(registerDTO);
@@ -75,6 +80,14 @@ public class HomePageController {
     public String getLoginPage(Model model) {
         model.addAttribute("loginUser",new RegisterDTO());
         return "/client/auth/login";
+    }
+    
+    @PostMapping("/login")
+    public String postLoginPage(Model model,@ModelAttribute("loginUser") User user ) {
+        
+
+        
+        return "entity";
     }
     
 }
