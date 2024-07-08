@@ -52,7 +52,7 @@ public class ProductController {
 
         //kiểm tra nếu newProductBindingResult (những thuộc tính không input vào thì refresh về trang create product)
         if (newProductBindingResult.hasErrors()) {
-            return "/admin/product/create"; 
+            return "admin/product/create"; 
         }
 
         String image = this.uploadService.handleSaveUploadFile(file, "product");
@@ -69,7 +69,7 @@ public class ProductController {
         model.addAttribute("id", id);
         Product product = this.productService.getfindByIdProduct(id).get();
         model.addAttribute("product", product);
-        return "/admin/product/detail";
+        return "admin/product/detail";
     }
 
     // Delete
@@ -77,7 +77,7 @@ public class ProductController {
     public String getProductDetelePage(Model model, @PathVariable long id) {
         model.addAttribute("id", id);
         model.addAttribute("newProduct",this.productService.getfindByIdProduct(id) );
-        return "/admin/product/delete";
+        return "admin/product/delete";
     }
     
     @PostMapping("/admin/product/delete")
@@ -91,7 +91,7 @@ public class ProductController {
     public String getMethodName(Model model, @PathVariable long id) {
         model.addAttribute("id", id);
         model.addAttribute("newProduct", this.productService.getfindByIdProduct(id).get());
-        return "/admin/product/update";
+        return "admin/product/update";
     }
     
     @PostMapping("/admin/product/update")

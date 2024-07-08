@@ -34,23 +34,23 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @RequestMapping("/")
-    public String getHomePage(Model model) {
-        // List<User> listUser = this.userService.getFindAllUser();
-        // System.out.println(listUser);
-        // List<User> listByUser = this.userService.getFindByEmailUser("huy@gmail.com");
-        // System.out.println(listByUser);
-        // String test = this.userService.handHello();
-        // model.addAttribute("test", test);
-        return "hello";
-    }
+    // @RequestMapping("/")
+    // public String getHomePage(Model model) {
+    //     // List<User> listUser = this.userService.getFindAllUser();
+    //     // System.out.println(listUser);
+    //     // List<User> listByUser = this.userService.getFindByEmailUser("huy@gmail.com");
+    //     // System.out.println(listByUser);
+    //     // String test = this.userService.handHello();
+    //     // model.addAttribute("test", test);
+    //     return "hello";
+    // }
 
     @RequestMapping("/admin/user") // nếu chỉ truyền String vào thì mặc định là doGet
     public String getViewTableUser(Model model) {
         List<User> users = this.userService.getFindAllUser();
         // System.out.println(">>> check user: "+users);
         model.addAttribute("users", users);
-        return "/admin/user/show";
+        return "admin/user/show";
     }
 
     // Start View Detail
@@ -60,13 +60,13 @@ public class UserController {
         model.addAttribute("id", id);
         User users = this.userService.getUserById(id);
         model.addAttribute("userId", users);
-        return "/admin/user/detail";
+        return "admin/user/detail";
     }
 
     @GetMapping("/admin/user/create")
     public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User());
-        return "/admin/user/create";
+        return "admin/user/create";
     }
 
     @PostMapping("/admin/user/create")
@@ -81,7 +81,7 @@ public class UserController {
         // }
 
         if (newUserBindingResult.hasErrors()) {
-            return "/admin/user/create";
+            return "admin/user/create";
         }
         
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
@@ -103,7 +103,7 @@ public class UserController {
     public String getUpdateUserPage(Model model, @PathVariable Long id) {
         User currentUser = this.userService.getUserById(id);
         model.addAttribute("newUser", currentUser);
-        return "/admin/user/update";
+        return "admin/user/update";
     }
 
     @PostMapping("/admin/user/update")

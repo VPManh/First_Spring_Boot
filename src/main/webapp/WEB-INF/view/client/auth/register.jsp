@@ -30,11 +30,17 @@
                                                 <form:form method="post" action="/register"
                                                     modelAttribute="registerUser">
                                                     <div class="row mb-3">
+                                                        <c:set var="errorFirstName">
+                                                            <form:errors path="firstName" cssClass="invalid-feedback" />
+                                                        </c:set>
                                                         <div class="col-md-6">
                                                             <div class="form-floating mb-3 mb-md-0">
-                                                                <form:input class="form-control" path="firstName"
-                                                                    type="text" placeholder="Enter your first name" />
+                                                                <form:input
+                                                                    class="form-control ${not empty errorFirstName ? 'is-invalid' : ''}"
+                                                                    path="firstName" type="text"
+                                                                    placeholder="Enter your first name" />
                                                                 <label for="inputFirstName">First name</label>
+                                                                ${errorFirstName}
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
@@ -47,11 +53,11 @@
                                                     </div>
                                                     <div class="form-floating mb-3">
                                                         <c:set var="errorEmail">
-                                                                    <form:errors path="email"
-                                                                        cssClass="invalid-feedback" />
-                                                                </c:set>
-                                                        <form:input class="form-control ${not empty errorEmail ? 'is-invalid' : ''}" path="email" type="email"
-                                                            placeholder="name@example.com" />
+                                                            <form:errors path="email" cssClass="invalid-feedback" />
+                                                        </c:set>
+                                                        <form:input
+                                                            class="form-control ${not empty errorEmail ? 'is-invalid' : ''}"
+                                                            path="email" type="email" placeholder="name@example.com" />
                                                         <label for="inputEmail">Email address</label>
                                                         ${errorEmail}
                                                     </div>
@@ -62,8 +68,10 @@
                                                                     <form:errors path="confirmPassword"
                                                                         cssClass="invalid-feedback" />
                                                                 </c:set>
-                                                                <form:input class="form-control ${not empty errorPassword ? 'is-invalid' : ''}" path="password"
-                                                                    type="password" placeholder="Create a password" />
+                                                                <form:input
+                                                                    class="form-control ${not empty errorPassword ? 'is-invalid' : ''}"
+                                                                    path="password" type="password"
+                                                                    placeholder="Create a password" />
                                                                 <label for="inputPassword">Password</label>
                                                                 ${errorPassword}
                                                             </div>
@@ -87,7 +95,8 @@
                                                 </form:form>
                                             </div>
                                             <div class="card-footer text-center py-3">
-                                                <div class="small"><a href="/login">Đã có tài khoản? Đến trang đăng nhập</a>
+                                                <div class="small"><a href="/login">Đã có tài khoản? Đến trang đăng
+                                                        nhập</a>
                                                 </div>
                                             </div>
                                         </div>

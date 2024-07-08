@@ -6,7 +6,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -16,12 +15,10 @@ import vn.hoidanit.laptopshop.domain.dto.RegisterDTO;
 import vn.hoidanit.laptopshop.service.ProductService;
 import vn.hoidanit.laptopshop.service.UserService;
 
-import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -42,13 +39,13 @@ public class HomePageController {
     public String getHomepage(Model model) {
         List<Product> products = this.productService.getAllProduct();
         model.addAttribute("products", products);   
-        return "/client/homepage/show";
+        return "client/homepage/show";
     }
 
     @GetMapping("/register")
     public String getRegisterPage(Model model) {
         model.addAttribute("registerUser",new RegisterDTO());
-        return "/client/auth/register";
+        return "client/auth/register";
     }
 
     @PostMapping("/register")
@@ -62,7 +59,7 @@ public class HomePageController {
         // }
 
         if (registerUserBindingResult.hasErrors()) {
-            return "/client/auth/register";
+            return "client/auth/register";
             
         }
 
@@ -78,16 +75,8 @@ public class HomePageController {
     
     @GetMapping("/login")
     public String getLoginPage(Model model) {
-        model.addAttribute("loginUser",new RegisterDTO());
-        return "/client/auth/login";
-    }
-    
-    @PostMapping("/login")
-    public String postLoginPage(Model model,@ModelAttribute("loginUser") User user ) {
-        
 
-        
-        return "entity";
+        return "client/auth/login";
     }
-    
+
 }
