@@ -32,6 +32,10 @@
                                                         <div class="my-2" style="color: red;">Invalid email or password.
                                                         </div>
                                                     </c:if>
+                                                    <c:if test="${param.logout != null}">
+                                                        <div class="my-2" style="color: rgb(0, 15, 230);">Logout Success.
+                                                        </div>
+                                                    </c:if>
 
                                                     <div class="form-floating mb-3">
                                                         <input class="form-control" type="email"

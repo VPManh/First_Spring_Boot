@@ -41,9 +41,10 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public AuthenticationSuccessHandler mAuthenticationSuccessHandler(){
+    public AuthenticationSuccessHandler mAuthenticationSuccessHandler() {
         return new CustomSuccessHandler();
     }
+
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // ver 6 , lamda
@@ -57,17 +58,19 @@ public class SecurityConfiguration {
                                 "/images/**")
                         .permitAll()
 
-                        // Khi sử dụng Method hasRole thì nó sẽ bỏ đi tiền tố ROLE_ nên t phải cấu hình bên CustomUserDetailsService
-                        .requestMatchers("/admin/**").hasRole("ADMIN")  
+                        // Khi sử dụng Method hasRole thì nó sẽ bỏ đi tiền tố ROLE_ nên t phải cấu hình
+                        // bên CustomUserDetailsService
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
 
                         .anyRequest().authenticated())
-
 
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .failureUrl("/login?error")
                         .successHandler(mAuthenticationSuccessHandler())
-                        .permitAll());
+                        .permitAll())
+
+                .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
         return http.build();
     }
 }
