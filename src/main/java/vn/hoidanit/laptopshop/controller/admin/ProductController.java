@@ -43,7 +43,7 @@ public class ProductController {
     @GetMapping("/admin/product/create")
     public String getProductsPage(Model model) {
         model.addAttribute("newProduct" , new Product());
-        return "/admin/product/create";
+        return "admin/product/create";
     }
 
     @PostMapping("/admin/product/create")
