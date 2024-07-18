@@ -1,5 +1,6 @@
 package vn.hoidanit.laptopshop.controller.client;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.tags.shaded.org.apache.regexp.recompile;
@@ -58,7 +59,7 @@ public class ItemController {
 
         Cart cart = this.productService.fetchByUser(currentUser);
 
-        List<CartDetail> cartDetails = cart.getCartDetails();
+        List<CartDetail> cartDetails = cart ==  null ? new ArrayList<CartDetail>() : cart.getCartDetails();
         double totalPrice = 0;
         for (CartDetail cartDetail : cartDetails) {
             totalPrice = totalPrice + cartDetail.getPrice() * cartDetail.getQuantity();
@@ -68,5 +69,13 @@ public class ItemController {
         model.addAttribute("cartDetails", cartDetails);
         return "client/cart/show";
     }
+    @PostMapping("delete-cart-to-product/{id}")
+    public String postDeleteCartToProduct(@PathVariable long id, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        long cartDetailId = id;
+        this.productService.handleDeleteCartToProduct(cartDetailId,session);
+        return "redirect:/cart";
+    }
+
     
 }
