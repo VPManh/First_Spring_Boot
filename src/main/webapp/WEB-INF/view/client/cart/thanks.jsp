@@ -1,64 +1,76 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cảm ơn đã đặt hàng</title>
+    <meta charset="utf-8">
+    <title> Cart - LaptopShop </title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
+            rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+          rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/client/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="/client/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+
     <!-- Customized Bootstrap Stylesheet -->
     <link href="/client/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/client/css/style.css" rel="stylesheet">
 </head>
-<style>
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f3f3f3;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
 
-    .container {
-        text-align: center;
-    }
-
-    .content {
-        background-color: #ffffff;
-        padding: 40px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        max-width: 600px;
-        margin: auto;
-    }
-
-    h1 {
-        color: #333333;
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-    }
-
-    p {
-        color: #666666;
-        font-size: 1.2rem;
-        line-height: 1.6;
-        margin-bottom: 10px;
-    }
-
-</style>
 <body>
-<div class="container">
-    <div class="content">
-        <h1>Cảm ơn bạn đã đặt hàng!</h1>
-        <p>Xin chào! Chúng tôi đã nhận được đơn hàng của bạn và sẽ xử lý sớm nhất có thể.</p>
-        <p>Cảm ơn bạn đã lựa chọn sản phẩm của chúng tôi.</p>
-    </div>
-    <div class="mt-4">
-        <i class="fas fa-arrow-left"></i>
-        <a href="/">Quay lại trang chủ</a>
+
+<!-- Spinner Start -->
+<div id="spinner"
+     class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+    <div class="spinner-grow text-primary" role="status"></div>
+</div>
+<!-- Spinner End -->
+
+<div class="container" style="margin-top: 100px">
+    <div class="row" >
+        <div class="col-12 mt-5">
+
+            <div class="alert alert-success" role="alert">
+                Cảm ơn bạn đã đặt hàng, đơn hàng của bạn đã được xác nhận.
+            </div>
+        </div>
     </div>
 </div>
+
+<jsp:include page="../layout/feature.jsp"/>
+
+
+
+<!-- JavaScript Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/client/lib/easing/easing.min.js"></script>
+<script src="/client/lib/waypoints/waypoints.min.js"></script>
+<script src="/client/lib/lightbox/js/lightbox.min.js"></script>
+<script src="/client/lib/owlcarousel/owl.carousel.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="/client/js/main.js"></script>
 </body>
+
 </html>

@@ -69,7 +69,7 @@ public class ItemController {
         return "client/cart/show";
     }
 
-    @PostMapping("delete-cart-to-product/{id}")
+    @PostMapping("/delete-cart-product/{id}")
     public String postDeleteCartToProduct(@PathVariable long id, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         long cartDetailId = id;
@@ -114,6 +114,7 @@ public class ItemController {
             @RequestParam("receiverAddress") String receiverAddress,
             @RequestParam("receiverPhone") String receiverPhone,
             @RequestParam("receiverNote") String receiverNote) {
+
         User currentUser = new User();// null
         HttpSession session = request.getSession(false);
         long id = (long) session.getAttribute("id");

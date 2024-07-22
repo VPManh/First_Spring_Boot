@@ -144,22 +144,29 @@ public class ProductService {
                                  String receiverPhone,
                                  String receiverNote) {
 
-//        create Order
-        Order order = new Order();
-        order.setUser(user);
-        order.setReceiverName(receiverName);
-        order.setReceiverAddress(receiverAddress);
-        order.setReceiverPhone(receiverPhone);
-        order.setReceiverNote(receiverNote);
-        this.orderRepository.save(order);
-
-//        create orderDetail
-
 //        step 1 : get cart by user
         Cart cart = this.cartRepository.findByUser(user);
         if (cart != null){
             List<CartDetail> cartDetails = cart.getCartDetails();
             if (cartDetails != null){
+
+//              create Order
+                Order order = new Order();
+                order.setUser(user);
+                order.setReceiverName(receiverName);
+                order.setReceiverAddress(receiverAddress);
+                order.setReceiverPhone(receiverPhone);
+                order.setReceiverNote(receiverNote);
+                order.setStatus("PENDING");
+
+                double sum = 0;
+                for(CartDetail cartDetail : cartDetails) {
+                    sum += cartDetail.getPrice();
+                }
+                order.setTotalPrice(sum);
+                order = this.orderRepository.save(order);
+
+//             create orderDetail
                 for (CartDetail cds : cartDetails){
                     OrderDetail orderDetail = new OrderDetail();
                     orderDetail.setOrder(order);
