@@ -114,9 +114,21 @@ public class ItemController {
             @RequestParam("receiverAddress") String receiverAddress,
             @RequestParam("receiverPhone") String receiverPhone,
             @RequestParam("receiverNote") String receiverNote) {
+        User currentUser = new User();// null
         HttpSession session = request.getSession(false);
+        long id = (long) session.getAttribute("id");
+        currentUser.setId(id);
 
-        return "redirect:/";
+        this.productService.handlePlaceOrder(currentUser,session,
+                receiverName,receiverAddress,
+                receiverPhone,receiverNote);
+
+
+        return "redirect:/thanks";
     }
 
+    @GetMapping("/thanks")
+    public String getThanksPage(){
+        return "client/cart/thanks";
+    }
 }
