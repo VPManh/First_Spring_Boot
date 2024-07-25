@@ -6,14 +6,14 @@
                 <div class="d-flex justify-content-between">
                     <div class="top-info ps-2">
                         <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#"
-                                class="text-white">123 Street, New York</a></small>
+                                class="text-white">Sơn Trà, Đà Nẵng</a></small>
                         <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#"
                                 class="text-white">Email@Example.com</a></small>
                     </div>
                     <div class="top-link pe-2">
-                        <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
-                        <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-                        <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
+                        <a href="#" class="text-white"><small class="text-white mx-2">Chính sách bảo mật</small>/</a>
+                        <a href="#" class="text-white"><small class="text-white mx-2">Điều khoản sử dụng</small></a>
+<%--                        <a href="#" class="text-white"><small class="text-white ms-2">Bán hàng và hoàn tiền</small></a>--%>
                     </div>
                 </div>
             </div>
@@ -28,8 +28,8 @@
                     </button>
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
-                            <a href="/" class="nav-item nav-link active">Home</a>
-                            <a href="#" class="nav-item nav-link">Shop</a>
+                            <a href="/" class="nav-item nav-link active">Trang chủ</a>
+                            <a href="#" class="nav-item nav-link">Sản phẩm</a>
                             <!-- <a href="shop-detail.html" class="nav-item nav-link">Shop Detail</a> -->
                             <div class="nav-item dropdown">
                                 <!-- <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
@@ -40,7 +40,7 @@
                             <a href="404.html" class="dropdown-item">404 Page</a>
                         </div> -->
                             </div>
-                            <a href="#" class="nav-item nav-link">Contact</a>
+                            <a href="#" class="nav-item nav-link">Liên hệ</a>
                         </div>
                         <div class="d-flex m-3 me-0">
                             <button

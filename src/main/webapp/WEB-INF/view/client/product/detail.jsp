@@ -45,18 +45,19 @@
                 <!-- Spinner End -->
 
                 <jsp:include page="../layout/header.jsp" />
-
-
+                <div class="container-fluid page-header py-5">
+                    <h1 class="text-center text-white display-6" style="margin-top: 90px !important">Chi tiết sản phẩm</h1>
+                    <ol class="breadcrumb justify-content-center mb-0" >
+                        <li class="breadcrumb-item" ><a href="/">Trang chủ</a></li>
+                        <%--        <li class="breadcrumb-item" ><a href="/cart">Cart</a></li>--%>
+                        <li class="breadcrumb-item active text-white">Chi tiết sản phẩm</li>
+                    </ol>
+                </div>
                 <!-- Single Product Start -->
                 <div class="container-fluid py-5 mt-5" style="margin-top: 4rem !important;">
                    
                     <div class="container py-5">
                         <div class="row g-4 mb-5">
-                            <ol class="breadcrumb mb-4">
-                                <li class="breadcrumb-item active"><a href="/">Trang chủ</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Chi Tiết Sản Phẩm
-                                </li>
-                            </ol>
                             <div class="col-lg-8 col-xl-9">
                                 <div class="row g-4">
                                     <div class="col-lg-6">
