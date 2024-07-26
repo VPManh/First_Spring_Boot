@@ -1,6 +1,7 @@
 package vn.hoidanit.laptopshop.controller.client;
 
 import java.util.List;
+import java.util.Optional;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -46,17 +47,13 @@ public class HomePageController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/")
-    public String getHomepage(Model model, @RequestParam("page") int page) {
+        @GetMapping("/")
+        public String getHomepage(Model model) {
 
-        Pageable pageable = PageRequest.of(page,10);
-
-        Page<Product> products = this.productService.getAllProduct(pageable);
-
-        List<Product> productList = products.getContent();
-        model.addAttribute("products", productList);
-        return "client/homepage/show";
-    }
+            List<Product> listProduct = this.productService.getTop10Products();
+            model.addAttribute("products", listProduct);
+            return "client/homepage/show";
+        }
 
     @GetMapping("/register")
     public String getRegisterPage(Model model) {
