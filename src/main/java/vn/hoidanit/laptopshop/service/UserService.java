@@ -2,6 +2,8 @@ package vn.hoidanit.laptopshop.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import vn.hoidanit.laptopshop.domain.Role;
@@ -87,4 +89,8 @@ public class UserService {
 //    public long countByRoleUser(Role role){
 //            return this.userRepository.countByRole(role.setName("USER"));
 //    }
+
+    public Page<User> getfindAllUser(Pageable pageable){
+        return this.userRepository.findAll(pageable);
+    }
 }
