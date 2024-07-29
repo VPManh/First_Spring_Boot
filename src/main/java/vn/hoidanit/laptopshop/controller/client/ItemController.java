@@ -2,8 +2,12 @@ package vn.hoidanit.laptopshop.controller.client;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.tags.shaded.org.apache.regexp.recompile;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -136,12 +140,19 @@ public class ItemController {
     @PostMapping("/add-product-from-view-detail")
     public String handleAddProductFromViewDetail(
             @RequestParam("id") long id,
-            @RequestParam("quantity") long quantity,
+            @RequestParam("quantity") String quantityStr,
             HttpServletRequest request) {
 
         HttpSession session = request.getSession(false);
-
         String email = (String) session.getAttribute("email");
+
+        long quantity = 0;
+        try {
+            quantity = Long.parseLong(quantityStr);
+        } catch (NumberFormatException e) {
+            quantity = 1; // Giá trị mặc định
+        }
+
         this.productService.handleAddProductCart(email, id, session, quantity);
 
         return "redirect:/product/" + id;
