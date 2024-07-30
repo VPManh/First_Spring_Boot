@@ -122,8 +122,8 @@ public class UserController {
 
     // Start View Update
 
-    @RequestMapping("/admin/user/update/{id}")
-    public String getUpdateUserPage(Model model, @PathVariable Long id) {
+    @GetMapping("/admin/user/update/{id}")
+    public String getUpdateUserPage(Model model, @PathVariable long id) {
         User currentUser = this.userService.getUserById(id);
         model.addAttribute("newUser", currentUser);
         return "admin/user/update";

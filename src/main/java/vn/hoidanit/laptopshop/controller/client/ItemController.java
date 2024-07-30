@@ -157,4 +157,28 @@ public class ItemController {
 
         return "redirect:/product/" + id;
     }
+
+    @GetMapping("/products")
+    public String getPageProducts(Model model, @RequestParam("page") Optional<String> optional) {
+
+        int page = 1;
+        try {
+        if (optional.isPresent()) {
+            page = Integer.parseInt(optional.get());
+        }else {
+
+        }
+        }catch (Exception e) {
+
+        }
+
+        Pageable pageable = PageRequest.of(page - 1 ,6);
+        Page<Product> productPage = this.productService.getAllProduct(pageable);
+        List<Product> products = productPage.getContent();
+
+        model.addAttribute("products", products);
+        model.addAttribute("page", page);
+        model.addAttribute("totalPages", productPage.getTotalPages());
+        return "client/product/show";
+    }
 }
