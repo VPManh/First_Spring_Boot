@@ -124,16 +124,16 @@ public class ItemController {
         long id = (long) session.getAttribute("id");
         currentUser.setId(id);
 
-        this.productService.handlePlaceOrder(currentUser,session,
-                receiverName,receiverAddress,
-                receiverPhone,receiverNote);
+        this.productService.handlePlaceOrder(currentUser, session,
+                receiverName, receiverAddress,
+                receiverPhone, receiverNote);
 
 
         return "redirect:/thanks";
     }
 
     @GetMapping("/thanks")
-    public String getThanksPage(){
+    public String getThanksPage() {
         return "client/cart/thanks";
     }
 
@@ -159,21 +159,25 @@ public class ItemController {
     }
 
     @GetMapping("/products")
-    public String getPageProducts(Model model, @RequestParam("page") Optional<String> optional) {
+    public String getPageProducts(Model model
+            , @RequestParam("page") Optional<String> optionalPage
+            , @RequestParam("name") Optional<String> optionalName) {
 
         int page = 1;
         try {
-        if (optional.isPresent()) {
-            page = Integer.parseInt(optional.get());
-        }else {
+            if (optionalPage.isPresent()) {
+                page = Integer.parseInt(optionalPage.get());
+            } else {
+
+            }
+        } catch (Exception e) {
 
         }
-        }catch (Exception e) {
 
-        }
+        String name = optionalName.get();
 
-        Pageable pageable = PageRequest.of(page - 1 ,6);
-        Page<Product> productPage = this.productService.getAllProduct(pageable);
+        Pageable pageable = PageRequest.of(page - 1, 6);
+        Page<Product> productPage = this.productService.getAllProduct(pageable,name);
         List<Product> products = productPage.getContent();
 
         model.addAttribute("products", products);
