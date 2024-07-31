@@ -6,7 +6,7 @@ import vn.hoidanit.laptopshop.domain.Product_;
 
 import java.util.List;
 
-public class productSpecs {
+public class ProductSpecs {
 
     public static Specification<Product> nameLike(String name) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Product_.NAME), "%" + name + "%");
@@ -44,4 +44,15 @@ public class productSpecs {
         return (root, query, criteriaBuilder) -> criteriaBuilder.between(
                 root.get(Product_.PRICE), min, max);
     }
+
+    // case7
+    public static Specification<Product> matchTarget(String target) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Product_.TARGET), target);
+    }
+
+    // case8
+    public static Specification<Product> matchListTarget(List<String> target) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.in(root.get(Product_.TARGET)).value(target);
+    }
+
 }
